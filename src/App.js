@@ -1,7 +1,12 @@
 import React from "react";
+import { Countries } from "./components";
 
 function App() {
-  return <div>Hello WWWorld</div>;
+  return (
+    <div>
+      <Countries />
+    </div>
+  );
 }
 
 export default App;
