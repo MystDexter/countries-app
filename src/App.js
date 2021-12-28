@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      <Countries data={countryData} />
+      <Countries countryData={countryData} />
     </div>
   );
 }
