@@ -1,6 +1,6 @@
 import React from "react";
 
-const Countries = () => {
+const Countries = ({ data }) => {
   return <div>Countries</div>;
 };
 
