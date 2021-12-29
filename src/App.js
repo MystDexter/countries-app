@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Countries } from "./components";
+import { Header, Filter, Countries } from "./components";
 import { fetchCountryData } from "./api";
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
 
   return (
     <div>
+      <Header />
+      <Filter data={countryData} />
       <Countries countryData={countryData} />
     </div>
   );
