@@ -24,10 +24,10 @@ const Countries = ({ countryData }) => {
                 primary={name}
                 secondary={
                   <Fragment>
-                    <Typography variant="body2" color="textSecondary">
-                      Region: {region}
+                    <Typography variant="body2">
+                      <b>Region:</b> {region}
                     </Typography>
-                    Area Size: {area} km²
+                    <b>Area Size:</b> {area} km²
                   </Fragment>
                 }
               />
