@@ -12,14 +12,10 @@ function App() {
     fetchAPI();
   }, []);
 
-  useEffect(() => {
-    setCountryData(initialData);
-  }, [initialData]);
-
   return (
     <div>
       <Header />
-      <Countries countryData={countryData} />
+      <Countries countries={countryData} />
     </div>
   );
 }

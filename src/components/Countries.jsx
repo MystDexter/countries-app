@@ -11,17 +11,14 @@ import {
 import { filterRegions } from "../api";
 import { Filter, Search } from ".";
 
-const Countries = ({ countryData: initialData }) => {
-  const [countries, setCountries] = useState(initialData);
+const Countries = ({ countries }) => {
+  const [filtered, setFiltered] = useState(countries);
 
   useEffect(() => {
-    setCountries(initialData);
-  }, [initialData]);
+    setFiltered(countries);
+  }, [countries]);
 
-  console.log(countries);
-  console.log(initialData);
-
-  const regions = [...new Set(initialData.map((data) => data.region))];
+  const regions = [...new Set(countries.map((data) => data.region))];
 
   const handleSearch = (searchValue) => {
     if (searchValue) {
@@ -29,27 +26,49 @@ const Countries = ({ countryData: initialData }) => {
         const value = searchValue.trim().toLowerCase();
         return name.toLowerCase().indexOf(value) > -1;
       });
-      setCountries(searchedCountries);
+      setFiltered(searchedCountries);
     } else {
-      setCountries(initialData);
+      setFiltered(countries);
     }
   };
 
   const handleRegionFilter = async (region) => {
     region.length
-      ? setCountries(await filterRegions(region))
-      : setCountries(initialData);
+      ? setFiltered(await filterRegions(region))
+      : setFiltered(countries);
+  };
+
+  const handleAreaFilter = () => {
+    const lithuania = countries.filter(({ name }) => {
+      return name == "Lithuania";
+    });
+    const [{ area: lithuaniaArea }] = lithuania;
+    const areaFilter = countries.filter((country) => {
+      return country.area < lithuaniaArea;
+    });
+    setFiltered(areaFilter);
   };
 
   return (
     <Fragment>
       <section className="filter">
         <Search onSearch={handleSearch} />
-        <Filter options={regions} onFilter={handleRegionFilter} />
+        <div>
+          <Filter
+            label={"Filter by region"}
+            options={regions}
+            onFilter={handleRegionFilter}
+          />
+          <Filter
+            label={"Filter by area"}
+            options={["Smaller than Lithuania"]}
+            onFilter={handleAreaFilter}
+          />
+        </div>
       </section>
-      {countries.length > 0 ? (
+      {filtered.length > 0 ? (
         <List sx={{ width: "100%" }}>
-          {countries.map((data, i) => {
+          {filtered.map((data, i) => {
             const { name, region, area, flag } = data;
             return (
               <Fragment key={i}>

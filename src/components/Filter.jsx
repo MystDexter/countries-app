@@ -1,15 +1,11 @@
 import React from "react";
 import { FormControl, NativeSelect } from "@material-ui/core";
 
-const Filter = ({ onFilter, options }) => {
+const Filter = ({ label, options, onFilter }) => {
   return (
-    // <section className="filter">
-    //   <FormControl>
-    //     <Button>Smaller than Lithuania</Button>
-    //   </FormControl>
     <FormControl>
       <NativeSelect defaultValue="" onChange={(e) => onFilter(e.target.value)}>
-        <option value=""> Filter by region </option>
+        <option value=""> {label} </option>
         {options.map((option, i) => (
           <option key={i} value={option}>
             {option}
