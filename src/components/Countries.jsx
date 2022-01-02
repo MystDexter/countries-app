@@ -38,15 +38,19 @@ const Countries = ({ countries }) => {
       : setFiltered(countries);
   };
 
-  const handleAreaFilter = () => {
-    const lithuania = countries.filter(({ name }) => {
-      return name == "Lithuania";
-    });
-    const [{ area: lithuaniaArea }] = lithuania;
-    const areaFilter = countries.filter((country) => {
-      return country.area < lithuaniaArea;
-    });
-    setFiltered(areaFilter);
+  const handleAreaFilter = (checked) => {
+    if (checked) {
+      const lithuania = countries.filter(({ name }) => {
+        return name == "Lithuania";
+      });
+      const [{ area: lithuaniaArea }] = lithuania;
+      const areaFilter = countries.filter((country) => {
+        return country.area < lithuaniaArea;
+      });
+      setFiltered(areaFilter);
+    } else {
+      setFiltered(countries);
+    }
   };
 
   return (
@@ -60,9 +64,9 @@ const Countries = ({ countries }) => {
             onFilter={handleRegionFilter}
           />
           <Filter
-            label={"Filter by area"}
-            options={["Smaller than Lithuania"]}
+            label={"Smaller than Lithuania"}
             onFilter={handleAreaFilter}
+            singleOption
           />
         </div>
       </section>
