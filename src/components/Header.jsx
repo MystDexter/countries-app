@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, FormControl, TextField } from "@material-ui/core";
+import { AppBar, Toolbar } from "@material-ui/core";
 
 const Header = () => {
   const headerDisplay = () => {
@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header>
       <AppBar>{headerDisplay()}</AppBar>
-      {/* Rendering a second Toolbar prevent content from hiding
+      {/* Rendering a second Toolbar prevents content from hiding
       behind the app bar */}
       <Toolbar />
     </header>

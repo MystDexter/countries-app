@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Header, Filter, Countries } from "./components";
+import { Header, Countries } from "./components";
 import { fetchCountryData } from "./api";
 
 function App() {
   const [countryData, setCountryData] = useState([]);
-  const [filterTerm, setFilterTerm] = useState("");
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -13,23 +12,14 @@ function App() {
     fetchAPI();
   }, []);
 
-  const handleSearch = (e) => {
-    setFilterTerm(e);
-  };
-
-  const filteredCountries = countryData.filter(({ name, region }) => {
-    const term = filterTerm.trim().toLowerCase();
-    return (
-      name.toLowerCase().indexOf(term) > -1 ||
-      region.toLowerCase().indexOf(term) > -1
-    );
-  });
+  useEffect(() => {
+    setCountryData(initialData);
+  }, [initialData]);
 
   return (
     <div>
       <Header />
-      <Filter data={countryData} onFilter={handleSearch} />
-      <Countries countryData={filteredCountries} />
+      <Countries countryData={countryData} />
     </div>
   );
 }
