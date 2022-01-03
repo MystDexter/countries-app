@@ -7,18 +7,40 @@ import {
   ListItemAvatar,
   Avatar,
   Typography,
+  Icon,
+  IconButton,
 } from "@material-ui/core";
 import { filterRegions } from "../api";
-import { Filter, Search } from ".";
+import { Filter, Search, Sort } from ".";
+import _ from "lodash";
 
 const Countries = ({ countries }) => {
   const [filtered, setFiltered] = useState(countries);
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortBy, setSortBy] = useState("name");
+
+  const sortOptions = [
+    { value: "name", label: "Name" },
+    { value: "area", label: "Area" },
+  ];
+  const regions = [...new Set(countries.map((data) => data.region))];
 
   useEffect(() => {
     setFiltered(countries);
   }, [countries]);
 
-  const regions = [...new Set(countries.map((data) => data.region))];
+  const handleSort = () => {
+    setSortOrder(sortOrder == "asc" ? "desc" : "asc");
+  };
+
+  const handleSortBy = (e) => {
+    setSortBy(e);
+  };
+
+  useEffect(() => {
+    const sorted = _.orderBy(filtered, [sortBy], [sortOrder]);
+    setFiltered(sorted);
+  }, [sortBy, sortOrder]);
 
   const handleSearch = (searchValue) => {
     if (searchValue) {
@@ -68,6 +90,16 @@ const Countries = ({ countries }) => {
             onFilter={handleAreaFilter}
             singleOption
           />
+          <div display="flex">
+            <Sort
+              label="Sort by:"
+              options={sortOptions}
+              onSort={handleSortBy}
+            />
+            <IconButton onClick={handleSort}>
+              <Icon>sort_by_alpha</Icon>
+            </IconButton>
+          </div>
         </div>
       </section>
       {filtered.length > 0 ? (
