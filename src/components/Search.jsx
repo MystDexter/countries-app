@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  FormControl,
-  InputAdornment,
-  TextField,
-  Icon,
-} from "@material-ui/core";
+import { InputAdornment, TextField, Icon } from "@material-ui/core";
 
 const Search = ({ onSearch }) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -19,7 +14,7 @@ const Search = ({ onSearch }) => {
     : {};
 
   return (
-    <FormControl>
+    <div>
       <TextField
         variant="outlined"
         size="small"
@@ -32,7 +27,7 @@ const Search = ({ onSearch }) => {
         onBlur={(e) => setIsSelected(false)}
         InputProps={iconAdornment}
       />
-    </FormControl>
+    </div>
   );
 };
 

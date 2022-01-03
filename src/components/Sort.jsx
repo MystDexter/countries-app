@@ -1,10 +1,29 @@
 import React from "react";
-import { FormControl, NativeSelect, Typography } from "@material-ui/core";
+import {
+  NativeSelect,
+  Typography,
+  makeStyles,
+  createStyles,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      alignItems: "center",
+    },
+    label: {
+      marginRight: theme.spacing(2),
+    },
+  })
+);
 
 const Sort = ({ label, options, onSort }) => {
+  const classes = useStyles();
+
   return (
-    <FormControl>
-      <Typography variant="body2">
+    <div className={classes.root}>
+      <Typography variant="body2" className={classes.label}>
         <b>{label}</b>
       </Typography>
       <NativeSelect onChange={(e) => onSort(e.target.value)}>
@@ -14,7 +33,7 @@ const Sort = ({ label, options, onSort }) => {
           </option>
         ))}
       </NativeSelect>
-    </FormControl>
+    </div>
   );
 };
 

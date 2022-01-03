@@ -9,12 +9,37 @@ import {
   Typography,
   Icon,
   IconButton,
+  Toolbar,
+  makeStyles,
+  createStyles,
 } from "@material-ui/core";
 import { filterRegions } from "../api";
 import { Filter, Search, Sort } from ".";
 import _ from "lodash";
 
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    header: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    filter: {
+      marginLeft: theme.spacing(2),
+    },
+    flex: {
+      display: "flex",
+      alignItems: "center",
+    },
+    countryListItem: {
+      paddingLeft: theme.spacing(2.5),
+    },
+  })
+);
+
 const Countries = ({ countries }) => {
+  const classes = useStyles();
+
   const [filtered, setFiltered] = useState(countries);
   const [sortOrder, setSortOrder] = useState("asc");
   const [sortBy, setSortBy] = useState("name");
@@ -23,6 +48,7 @@ const Countries = ({ countries }) => {
     { value: "name", label: "Name" },
     { value: "area", label: "Area" },
   ];
+
   const regions = [...new Set(countries.map((data) => data.region))];
 
   useEffect(() => {
@@ -77,38 +103,41 @@ const Countries = ({ countries }) => {
 
   return (
     <Fragment>
-      <section className="filter">
+      <Toolbar>
         <Search onSearch={handleSearch} />
-        <div>
+      </Toolbar>
+      <Toolbar className={classes.header}>
+        <div className={classes.flex}>
           <Filter
             label={"Filter by region"}
             options={regions}
             onFilter={handleRegionFilter}
           />
-          <Filter
-            label={"Smaller than Lithuania"}
-            onFilter={handleAreaFilter}
-            singleOption
-          />
-          <div display="flex">
-            <Sort
-              label="Sort by:"
-              options={sortOptions}
-              onSort={handleSortBy}
+          <div className={classes.filter}>
+            <Filter
+              label={"Smaller than Lithuania"}
+              onFilter={handleAreaFilter}
+              singleOption
             />
-            <IconButton onClick={handleSort}>
-              <Icon>sort_by_alpha</Icon>
-            </IconButton>
           </div>
         </div>
-      </section>
+        <div className={classes.flex}>
+          <Sort label="Sort by:" options={sortOptions} onSort={handleSortBy} />
+          <IconButton onClick={handleSort}>
+            <Icon>sort_by_alpha</Icon>
+          </IconButton>
+        </div>
+      </Toolbar>
       {filtered.length > 0 ? (
-        <List sx={{ width: "100%" }}>
+        <List>
           {filtered.map((data, i) => {
             const { name, region, area, flag } = data;
             return (
               <Fragment key={i}>
-                <ListItem alignItems="flex-start">
+                <ListItem
+                  className={classes.countryListItem}
+                  alignItems="flex-start"
+                >
                   <ListItemAvatar>
                     <Avatar alt="flag" src={flag} />
                   </ListItemAvatar>
