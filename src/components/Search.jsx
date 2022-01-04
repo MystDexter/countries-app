@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { InputAdornment, TextField, Icon } from "@material-ui/core";
 
 const Search = ({ onSearch }) => {
@@ -14,7 +14,7 @@ const Search = ({ onSearch }) => {
     : {};
 
   return (
-    <div>
+    <Fragment>
       <TextField
         variant="outlined"
         size="small"
@@ -27,7 +27,7 @@ const Search = ({ onSearch }) => {
         onBlur={(e) => setIsSelected(false)}
         InputProps={iconAdornment}
       />
-    </div>
+    </Fragment>
   );
 };
 

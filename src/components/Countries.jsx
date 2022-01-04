@@ -1,11 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 import {
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
   Typography,
   Icon,
   IconButton,
@@ -14,7 +8,7 @@ import {
   createStyles,
 } from "@material-ui/core";
 import { filterRegions } from "../api";
-import { Filter, Search, Sort } from ".";
+import { CountryList, Filter, Pagination, Search, Sort } from ".";
 import _ from "lodash";
 
 const useStyles = makeStyles((theme) =>
@@ -31,9 +25,6 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       alignItems: "center",
     },
-    countryListItem: {
-      paddingLeft: theme.spacing(2.5),
-    },
   })
 );
 
@@ -43,6 +34,7 @@ const Countries = ({ countries }) => {
   const [filtered, setFiltered] = useState(countries);
   const [sortOrder, setSortOrder] = useState("asc");
   const [sortBy, setSortBy] = useState("name");
+  const [resetPagination, setResetPagination] = useState(false);
 
   const sortOptions = [
     { value: "name", label: "Name" },
@@ -75,6 +67,7 @@ const Countries = ({ countries }) => {
         return name.toLowerCase().indexOf(value) > -1;
       });
       setFiltered(searchedCountries);
+      setResetPagination(true);
     } else {
       setFiltered(countries);
     }
@@ -82,7 +75,7 @@ const Countries = ({ countries }) => {
 
   const handleRegionFilter = async (region) => {
     region.length
-      ? setFiltered(await filterRegions(region))
+      ? (setFiltered(await filterRegions(region)), setResetPagination(true))
       : setFiltered(countries);
   };
 
@@ -96,6 +89,7 @@ const Countries = ({ countries }) => {
         return country.area < lithuaniaArea;
       });
       setFiltered(areaFilter);
+      setResetPagination(true);
     } else {
       setFiltered(countries);
     }
@@ -129,35 +123,14 @@ const Countries = ({ countries }) => {
         </div>
       </Toolbar>
       {filtered.length > 0 ? (
-        <List>
-          {filtered.map((data, i) => {
-            const { name, region, area, flag } = data;
-            return (
-              <Fragment key={i}>
-                <ListItem
-                  className={classes.countryListItem}
-                  alignItems="flex-start"
-                >
-                  <ListItemAvatar>
-                    <Avatar alt="flag" src={flag} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={name}
-                    secondary={
-                      <Fragment>
-                        <Typography variant="body2">
-                          <b>Region:</b> {region}
-                        </Typography>
-                        <b>Area Size:</b> {area} km²
-                      </Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-              </Fragment>
-            );
-          })}
-        </List>
+        // <CountryList data={filtered} />
+        <Pagination
+          data={filtered}
+          RenderComponent={CountryList}
+          pageLimit={5}
+          dataLimit={10}
+          isFiltered={resetPagination}
+        />
       ) : (
         <Typography align="center">
           No countries match that search term
