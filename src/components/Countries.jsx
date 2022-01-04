@@ -41,7 +41,15 @@ const Countries = ({ countries }) => {
     { value: "area", label: "Area" },
   ];
 
-  const regions = [...new Set(countries.map((data) => data.region))];
+  const regions = [...new Set(countries.map((country) => country.region))];
+  const regionFilterOptions = regions.map((region) => ({
+    value: region,
+    label: region,
+  }));
+
+  const areaFilterOptions = [
+    { value: "lithuania", label: "Smaller than Lithuania" },
+  ];
 
   useEffect(() => {
     setFiltered(countries);
@@ -79,14 +87,14 @@ const Countries = ({ countries }) => {
       : setFiltered(countries);
   };
 
-  const handleAreaFilter = (checked) => {
-    if (checked) {
-      const lithuania = countries.filter(({ name }) => {
-        return name == "Lithuania";
+  const handleAreaFilter = (e) => {
+    if (e) {
+      const country = countries.filter(({ name }) => {
+        return name.toLowerCase() == e;
       });
-      const [{ area: lithuaniaArea }] = lithuania;
+      const [{ area: countryArea }] = country;
       const areaFilter = countries.filter((country) => {
-        return country.area < lithuaniaArea;
+        return country.area < countryArea;
       });
       setFiltered(areaFilter);
       setResetPagination(true);
@@ -104,26 +112,25 @@ const Countries = ({ countries }) => {
         <div className={classes.flex}>
           <Filter
             label={"Filter by region"}
-            options={regions}
+            options={regionFilterOptions}
             onFilter={handleRegionFilter}
           />
           <div className={classes.filter}>
             <Filter
-              label={"Smaller than Lithuania"}
+              label={"Filter by Area"}
+              options={areaFilterOptions}
               onFilter={handleAreaFilter}
-              singleOption
             />
           </div>
         </div>
         <div className={classes.flex}>
-          <Sort label="Sort by:" options={sortOptions} onSort={handleSortBy} />
+          <Sort label="" options={sortOptions} onSort={handleSortBy} />
           <IconButton onClick={handleSort}>
             <Icon>sort_by_alpha</Icon>
           </IconButton>
         </div>
       </Toolbar>
       {filtered.length > 0 ? (
-        // <CountryList data={filtered} />
         <Pagination
           data={filtered}
           RenderComponent={CountryList}
@@ -132,9 +139,7 @@ const Countries = ({ countries }) => {
           isFiltered={resetPagination}
         />
       ) : (
-        <Typography align="center">
-          No countries match that search term
-        </Typography>
+        <Typography align="center">No countries found</Typography>
       )}
     </Fragment>
   );
