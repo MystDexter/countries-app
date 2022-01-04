@@ -8,7 +8,15 @@ import {
   createStyles,
 } from "@material-ui/core";
 import { filterRegions } from "../api";
-import { CountryList, Filter, Pagination, Search, Sort } from ".";
+import {
+  CountryList,
+  CountryGrid,
+  Filter,
+  Pagination,
+  Search,
+  Sort,
+  ToggleView,
+} from ".";
 import _ from "lodash";
 
 const useStyles = makeStyles((theme) =>
@@ -25,6 +33,10 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       alignItems: "center",
     },
+    toggleView: {
+      height: 40,
+      margin: `0 ${theme.spacing(2)}px`,
+    },
   })
 );
 
@@ -35,6 +47,7 @@ const Countries = ({ countries }) => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [sortBy, setSortBy] = useState("name");
   const [resetPagination, setResetPagination] = useState(false);
+  const [view, setView] = useState("list");
 
   const sortOptions = [
     { value: "name", label: "Name" },
@@ -107,6 +120,12 @@ const Countries = ({ countries }) => {
     <Fragment>
       <Toolbar>
         <Search onSearch={handleSearch} />
+        <div>
+          <ToggleView
+            className={classes.toggleView}
+            onToggle={(e) => setView(e)}
+          />
+        </div>
       </Toolbar>
       <Toolbar className={classes.header}>
         <div className={classes.flex}>
@@ -133,9 +152,9 @@ const Countries = ({ countries }) => {
       {filtered.length > 0 ? (
         <Pagination
           data={filtered}
-          RenderComponent={CountryList}
+          RenderComponent={view == "list" ? CountryList : CountryGrid}
           pageLimit={5}
-          dataLimit={10}
+          dataLimit={12}
           isFiltered={resetPagination}
         />
       ) : (

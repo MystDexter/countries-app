@@ -1,9 +1,10 @@
 import React from "react";
 import { AppBar, Toolbar } from "@material-ui/core";
+import { ToggleView } from ".";
 
 const Header = () => {
   const headerDisplay = () => {
-    return <Toolbar>Country Data</Toolbar>;
+    return <Toolbar>Countries of the World</Toolbar>;
   };
 
   return (

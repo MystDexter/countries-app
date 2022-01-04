@@ -6,7 +6,6 @@ const ToggleView = ({ onToggle }) => {
   const [alignment, setAlignment] = useState("list");
 
   const handleAlignment = (e, newAlignment) => {
-    console.log(newAlignment);
     setAlignment(newAlignment);
     onToggle(newAlignment);
   };

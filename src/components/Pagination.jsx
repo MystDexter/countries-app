@@ -10,16 +10,16 @@ const useStyles = makeStyles((theme) =>
       marginBottom: theme.spacing(2),
     },
     paginationItem: {
-      border: "2px solid",
+      // border: "2px solid",
       padding: theme.spacing(2),
       borderRadius: "50%",
-      margin: `0 ${theme.spacing(0.5)}px`,
+      margin: `0 ${theme.spacing(0.25)}px`,
     },
     paginationItemActive: {
       border: "2px solid",
       padding: theme.spacing(2),
       borderRadius: "50%",
-      margin: `0 ${theme.spacing(0.5)}px`,
+      margin: `0 ${theme.spacing(0.25)}px`,
       pointerEvents: "none",
     },
     direction: {
@@ -72,15 +72,13 @@ function Pagination({
 
   return (
     <Fragment>
-      <div className="dataContainer">
-        <RenderComponent data={getPaginatedData()} />
-      </div>
-
+      <RenderComponent data={getPaginatedData()} />
       <div className={classes.pagination}>
         <Button
           onClick={goToPreviousPage}
           className={classes.direction}
           variant="outlined"
+          size="small"
           disabled={currentPage === 1 ? true : false}
         >
           prev
@@ -90,7 +88,7 @@ function Pagination({
           <Button
             key={index}
             onClick={handleChangePage}
-            variant={currentPage === item ? "contained" : "outlined"}
+            variant={currentPage === item ? "contained" : "text"}
             color="primary"
             className={
               currentPage === item
@@ -108,6 +106,7 @@ function Pagination({
           className={classes.direction}
           variant="outlined"
           disabled={currentPage === pages ? true : false}
+          size="small"
         >
           next
         </Button>

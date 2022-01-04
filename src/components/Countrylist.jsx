@@ -28,18 +28,21 @@ const CountryList = ({ data }) => {
         const { name, region, area, flag } = item;
         return (
           <Fragment key={i}>
-            <ListItem alignItems="flex-start">
+            <ListItem alignItems="center">
               <ListItemAvatar>
                 <Avatar alt="flag" src={flag} />
               </ListItemAvatar>
               <ListItemText
-                primary={name}
+                disableTypography
+                primary={<Typography variant="h6">{name}</Typography>}
                 secondary={
                   <Fragment>
-                    <Typography variant="body2">
-                      <b>Region:</b> {region}
+                    <Typography variant="body2" color="text.secondary">
+                      Region: {region}
                     </Typography>
-                    <b>Area Size:</b> {area} km²
+                    <Typography variant="body2" color="text.secondary">
+                      Area Size: {area} km²
+                    </Typography>
                   </Fragment>
                 }
               />
