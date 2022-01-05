@@ -21,6 +21,7 @@ const Filter = ({ label, options, onFilter, singleOption = false }) => {
         defaultValue=""
         onChange={(e) => onFilter(e.target.value)}
         displayEmpty
+        disableUnderline
       >
         <MenuItem value=""> {label} </MenuItem>
         {options.map(({ value, label }) => (

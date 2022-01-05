@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) =>
       alignItems: "center",
     },
     label: {
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(1),
     },
   })
 );
@@ -23,10 +23,8 @@ const Sort = ({ label, options, onSort }) => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="body2" className={classes.label}>
-        <b>{label}</b>
-      </Typography>
-      <NativeSelect onChange={(e) => onSort(e.target.value)}>
+      <Typography className={classes.label}>{label}</Typography>
+      <NativeSelect disableUnderline onChange={(e) => onSort(e.target.value)}>
         {options.map(({ value, label }) => (
           <option key={value} value={value}>
             {label}

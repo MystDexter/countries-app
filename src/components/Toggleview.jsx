@@ -16,6 +16,7 @@ const ToggleView = ({ onToggle }) => {
       exclusive
       onChange={handleAlignment}
       aria-label="text alignment"
+      size="small"
     >
       <ToggleButton value="list" aria-label="list">
         <Icon>view_list</Icon>

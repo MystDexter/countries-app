@@ -10,13 +10,11 @@ const useStyles = makeStyles((theme) =>
       marginBottom: theme.spacing(2),
     },
     paginationItem: {
-      // border: "2px solid",
       padding: theme.spacing(2),
       borderRadius: "50%",
       margin: `0 ${theme.spacing(0.25)}px`,
     },
     paginationItemActive: {
-      border: "2px solid",
       padding: theme.spacing(2),
       borderRadius: "50%",
       margin: `0 ${theme.spacing(0.25)}px`,

@@ -1,10 +1,13 @@
 import React from "react";
-import { AppBar, Toolbar } from "@material-ui/core";
-import { ToggleView } from ".";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
 const Header = () => {
   const headerDisplay = () => {
-    return <Toolbar>Countries of the World</Toolbar>;
+    return (
+      <Toolbar>
+        <Typography variant="h6">COUNTRIES OF THE WORLD</Typography>
+      </Toolbar>
+    );
   };
 
   return (

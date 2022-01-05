@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+
 import { Header, Countries } from "./components";
 import { fetchCountryData } from "./api";
 
@@ -12,11 +14,18 @@ function App() {
     fetchAPI();
   }, []);
 
+  //create material UI theme
+  const theme = createTheme({
+    typography: {
+      fontFamily: "Poppins, sans- serif",
+    },
+  });
+
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Header />
       <Countries countries={countryData} />
-    </div>
+    </ThemeProvider>
   );
 }
 

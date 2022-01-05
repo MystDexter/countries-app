@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) =>
       alignItems: "center",
     },
     toggleView: {
-      height: 40,
       margin: `0 ${theme.spacing(2)}px`,
     },
   })
@@ -120,30 +119,27 @@ const Countries = ({ countries }) => {
     <Fragment>
       <Toolbar>
         <Search onSearch={handleSearch} />
-        <div>
-          <ToggleView
-            className={classes.toggleView}
-            onToggle={(e) => setView(e)}
-          />
+        <div className={classes.toggleView}>
+          <ToggleView onToggle={(e) => setView(e)} />
         </div>
       </Toolbar>
       <Toolbar className={classes.header}>
         <div className={classes.flex}>
           <Filter
-            label={"Filter by region"}
+            label={"Region"}
             options={regionFilterOptions}
             onFilter={handleRegionFilter}
           />
           <div className={classes.filter}>
             <Filter
-              label={"Filter by Area"}
+              label={"Area"}
               options={areaFilterOptions}
               onFilter={handleAreaFilter}
             />
           </div>
         </div>
         <div className={classes.flex}>
-          <Sort label="" options={sortOptions} onSort={handleSortBy} />
+          <Sort label="Sort by" options={sortOptions} onSort={handleSortBy} />
           <IconButton onClick={handleSort}>
             <Icon>sort_by_alpha</Icon>
           </IconButton>
@@ -154,7 +150,7 @@ const Countries = ({ countries }) => {
           data={filtered}
           RenderComponent={view == "list" ? CountryList : CountryGrid}
           pageLimit={5}
-          dataLimit={12}
+          dataLimit={20}
           isFiltered={resetPagination}
         />
       ) : (
