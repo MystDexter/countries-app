@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider, Paper } from "@material-ui/core";
 
 import { Header, Countries } from "./components";
 import { fetchCountryData } from "./api";
 
 function App() {
   const [countryData, setCountryData] = useState([]);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -14,17 +15,21 @@ function App() {
     fetchAPI();
   }, []);
 
-  //create material UI theme
   const theme = createTheme({
     typography: {
       fontFamily: "Poppins, sans- serif",
+    },
+    palette: {
+      type: dark ? "dark" : "light",
     },
   });
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Countries countries={countryData} />
+      <Paper elevation={0}>
+        <Header onChangeMode={(e) => setDark(e)} />
+        <Countries countries={countryData} />
+      </Paper>
     </ThemeProvider>
   );
 }

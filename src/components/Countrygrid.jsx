@@ -39,12 +39,8 @@ const CountryGrid = ({ data }) => {
                   <Typography gutterBottom variant="h6" component="div">
                     {name}
                   </Typography>
-                  <Typography color="text.secondary" variant="body2">
-                    Region: {region}
-                  </Typography>
-                  <Typography color="text.secondary" variant="body2">
-                    Area Size: {area} km²
-                  </Typography>
+                  <Typography variant="body2">Region: {region}</Typography>
+                  <Typography variant="body2">Area Size: {area} km²</Typography>
                 </CardContent>
               </CardActionArea>
             </Card>

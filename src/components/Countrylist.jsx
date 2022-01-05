@@ -37,10 +37,8 @@ const CountryList = ({ data }) => {
                 primary={<Typography variant="h6">{name}</Typography>}
                 secondary={
                   <Fragment>
-                    <Typography variant="body2" color="text.secondary">
-                      Region: {region}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2">Region: {region}</Typography>
+                    <Typography variant="body2">
                       Area Size: {area} km²
                     </Typography>
                   </Fragment>
