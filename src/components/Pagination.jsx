@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: theme.spacing(2),
+      padding: `${theme.spacing(1)}px 0 ${theme.spacing(2)}px 0`,
     },
     paginationItem: {
       padding: theme.spacing(2),
