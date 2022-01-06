@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider, Paper } from "@material-ui/core";
 
-import { Header, Countries, Country } from "./components";
+import { Countries, Country } from "./screens";
+import { Header } from "./components";
 import { fetchAllCountries } from "./api";
 
 function App() {

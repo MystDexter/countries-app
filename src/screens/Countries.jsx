@@ -17,7 +17,7 @@ import {
   Search,
   Sort,
   ToggleView,
-} from ".";
+} from "../components";
 import _ from "lodash";
 
 const useStyles = makeStyles((theme) =>
