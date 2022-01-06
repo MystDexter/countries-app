@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import {
+  Grid,
   Typography,
   Icon,
   IconButton,
@@ -29,9 +30,26 @@ const useStyles = makeStyles((theme) =>
     filter: {
       marginLeft: theme.spacing(2),
     },
-    flex: {
+    flexStart: {
       display: "flex",
+      justifyContent: "flex-start",
       alignItems: "center",
+      "& > button": {
+        [theme.breakpoints.down("xs")]: {
+          flexGrow: 1,
+        },
+      },
+    },
+    flexEnd: {
+      display: "flex",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      "& > div": {
+        [theme.breakpoints.down("xs")]: {
+          flexGrow: 1,
+          justifyContent: "flex-start",
+        },
+      },
     },
     toggleView: {
       margin: `0 ${theme.spacing(2)}px`,
@@ -118,32 +136,34 @@ const Countries = ({ countries }) => {
   return (
     <Fragment>
       <Toolbar>
-        <Search onSearch={handleSearch} />
-        <div className={classes.toggleView}>
-          <ToggleView onToggle={(e) => setView(e)} />
-        </div>
-      </Toolbar>
-      <Toolbar className={classes.header}>
-        <div className={classes.flex}>
-          <Filter
-            label={"Region"}
-            options={regionFilterOptions}
-            onFilter={handleRegionFilter}
-          />
-          <div className={classes.filter}>
+        <Grid container spacing={1} style={{ paddingTop: 8 }}>
+          <Grid item xs={12} sm={12} md={4} className={classes.header}>
+            <Search label="Search for countries" onSearch={handleSearch} />
+            <div className={classes.toggleView}>
+              <ToggleView onToggle={(e) => setView(e)} />
+            </div>
+          </Grid>
+          <Grid item xs={6} sm={6} md={4} className={classes.flexStart}>
             <Filter
-              label={"Area"}
-              options={areaFilterOptions}
-              onFilter={handleAreaFilter}
+              label={"Region"}
+              options={regionFilterOptions}
+              onFilter={handleRegionFilter}
             />
-          </div>
-        </div>
-        <div className={classes.flex}>
-          <Sort label="Sort by" options={sortOptions} onSort={handleSortBy} />
-          <IconButton onClick={handleSort}>
-            <Icon>sort_by_alpha</Icon>
-          </IconButton>
-        </div>
+            <div className={classes.filter}>
+              <Filter
+                label={"Area"}
+                options={areaFilterOptions}
+                onFilter={handleAreaFilter}
+              />
+            </div>
+          </Grid>
+          <Grid item xs={6} sm={6} md={4} className={classes.flexEnd}>
+            <Sort label="Sort by" options={sortOptions} onSort={handleSortBy} />
+            <IconButton onClick={handleSort}>
+              <Icon>sort_by_alpha</Icon>
+            </IconButton>
+          </Grid>
+        </Grid>
       </Toolbar>
       {filtered.length > 0 ? (
         <Pagination

@@ -40,7 +40,7 @@ const Header = ({ onChangeMode }) => {
 
   return (
     <header>
-      <AppBar enableColorOnDark>{headerDisplay()}</AppBar>
+      <AppBar>{headerDisplay()}</AppBar>
       {/* Rendering a second Toolbar prevents content from hiding
       behind the app bar */}
       <Toolbar />
