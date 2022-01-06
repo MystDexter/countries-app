@@ -2,13 +2,13 @@ import React, { useState, useEffect, Fragment } from "react";
 import {
   Grid,
   Typography,
-  Icon,
-  IconButton,
   Toolbar,
   makeStyles,
   createStyles,
+  LinearProgress,
+  CircularProgress,
 } from "@material-ui/core";
-import { filterRegions } from "../api";
+import { fetchAllCountries, filterRegions } from "../api";
 import {
   CountryList,
   CountryGrid,
@@ -27,6 +27,11 @@ const useStyles = makeStyles((theme) =>
       alignItems: "center",
       justifyContent: "space-between",
     },
+    loader: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+    },
     filter: {
       marginLeft: theme.spacing(2),
     },
@@ -34,22 +39,11 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       justifyContent: "flex-start",
       alignItems: "center",
-      "& > button": {
-        [theme.breakpoints.down("xs")]: {
-          flexGrow: 1,
-        },
-      },
     },
     flexEnd: {
       display: "flex",
       justifyContent: "flex-end",
       alignItems: "center",
-      "& > div": {
-        [theme.breakpoints.down("xs")]: {
-          flexGrow: 1,
-          justifyContent: "flex-start",
-        },
-      },
     },
     toggleView: {
       margin: `0 ${theme.spacing(2)}px`,
@@ -57,14 +51,16 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const Countries = ({ countries }) => {
+const Countries = () => {
   const classes = useStyles();
 
-  const [filtered, setFiltered] = useState(countries);
+  const [countries, setCountries] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
   const [sortBy, setSortBy] = useState("name");
   const [resetPagination, setResetPagination] = useState(false);
   const [view, setView] = useState("list");
+  const [isLoading, setIsLoading] = useState(true);
 
   const sortOptions = [
     { value: "name", label: "Name" },
@@ -80,6 +76,15 @@ const Countries = ({ countries }) => {
   const areaFilterOptions = [
     { value: "lithuania", label: "Smaller than Lithuania" },
   ];
+
+  // Initial unfiltered store of countries data
+  useEffect(() => {
+    const fetchAPI = async () => {
+      setCountries(await fetchAllCountries());
+      setIsLoading(false);
+    };
+    fetchAPI();
+  }, []);
 
   useEffect(() => {
     setFiltered(countries);
@@ -135,49 +140,55 @@ const Countries = ({ countries }) => {
 
   return (
     <Fragment>
-      <Toolbar>
-        <Grid container spacing={1} style={{ paddingTop: 8 }}>
-          <Grid item xs={12} sm={12} md={4} className={classes.header}>
-            <Search label="Search for countries" onSearch={handleSearch} />
-            <div className={classes.toggleView}>
-              <ToggleView onToggle={(e) => setView(e)} />
-            </div>
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} className={classes.flexStart}>
-            <Filter
-              label={"Region"}
-              options={regionFilterOptions}
-              onFilter={handleRegionFilter}
-            />
-            <div className={classes.filter}>
-              <Filter
-                label={"Area"}
-                options={areaFilterOptions}
-                onFilter={handleAreaFilter}
-              />
-            </div>
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} className={classes.flexEnd}>
-            <Sort
-              label="Sort by"
-              options={sortOptions}
-              onSortBy={handleSortBy}
-              showSortDirection
-              onSortOrder={handleSortOrder}
-            />
-          </Grid>
-        </Grid>
-      </Toolbar>
-      {filtered.length > 0 ? (
-        <Pagination
-          data={filtered}
-          RenderComponent={view == "list" ? CountryList : CountryGrid}
-          pageLimit={5}
-          dataLimit={20}
-          isFiltered={resetPagination}
-        />
+      {isLoading ? (
+        <CircularProgress className={classes.loader} color="primary" />
       ) : (
-        <Typography align="center">No countries found</Typography>
+        <>
+          <Toolbar>
+            <Grid container spacing={1} style={{ paddingTop: 8 }}>
+              <Grid item xs={12} sm={12} md={4} className={classes.header}>
+                <Search label="Search for countries" onSearch={handleSearch} />
+                <div className={classes.toggleView}>
+                  <ToggleView onToggle={(e) => setView(e)} />
+                </div>
+              </Grid>
+              <Grid item xs={6} sm={6} md={4} className={classes.flexStart}>
+                <Filter
+                  label={"Region"}
+                  options={regionFilterOptions}
+                  onFilter={handleRegionFilter}
+                />
+                <div className={classes.filter}>
+                  <Filter
+                    label={"Area"}
+                    options={areaFilterOptions}
+                    onFilter={handleAreaFilter}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6} sm={6} md={4} className={classes.flexEnd}>
+                <Sort
+                  label="Sort by"
+                  options={sortOptions}
+                  onSortBy={handleSortBy}
+                  showSortDirection
+                  onSortOrder={handleSortOrder}
+                />
+              </Grid>
+            </Grid>
+          </Toolbar>
+          {filtered.length ? (
+            <Pagination
+              data={filtered}
+              RenderComponent={view == "list" ? CountryList : CountryGrid}
+              pageLimit={5}
+              dataLimit={20}
+              isFiltered={resetPagination}
+            />
+          ) : (
+            <Typography align="center">No countries found</Typography>
+          )}
+        </>
       )}
     </Fragment>
   );
