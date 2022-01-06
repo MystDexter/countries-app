@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
   Avatar,
@@ -58,6 +59,10 @@ const CountryList = ({ data }) => {
       })}
     </List>
   );
+};
+
+CountryList.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default CountryList;

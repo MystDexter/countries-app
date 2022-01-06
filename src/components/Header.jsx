@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   AppBar,
   IconButton,
@@ -46,6 +47,10 @@ const Header = ({ onChangeMode }) => {
       <Toolbar />
     </header>
   );
+};
+
+Header.propTypes = {
+  onChangeMode: PropTypes.func,
 };
 
 export default Header;

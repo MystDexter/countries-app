@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
+import PropTypes from "prop-types";
 import { makeStyles, createStyles, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) =>
@@ -112,5 +113,12 @@ function Pagination({
     </Fragment>
   );
 }
+
+Pagination.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  RenderComponent: PropTypes.func.isRequired,
+  pageLimit: PropTypes.number.isRequired,
+  dataLimit: PropTypes.number.isRequired,
+};
 
 export default Pagination;

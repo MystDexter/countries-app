@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import { Icon } from "@material-ui/core";
 
@@ -26,6 +27,10 @@ const ToggleView = ({ onToggle }) => {
       </ToggleButton>
     </ToggleButtonGroup>
   );
+};
+
+ToggleView.propTypes = {
+  onToggle: PropTypes.func.isRequired,
 };
 
 export default ToggleView;

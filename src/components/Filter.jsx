@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   FormControl,
   FormControlLabel,
@@ -7,7 +8,7 @@ import {
   Checkbox,
 } from "@material-ui/core";
 
-const Filter = ({ label, options, onFilter, singleOption = false }) => {
+const Filter = ({ label, options, onFilter, singleOption }) => {
   return singleOption ? (
     <FormControl>
       <FormControlLabel
@@ -32,6 +33,13 @@ const Filter = ({ label, options, onFilter, singleOption = false }) => {
       </Select>
     </FormControl>
   );
+};
+
+Filter.propTypes = {
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.object),
+  onFilter: PropTypes.func.isRequired,
+  singleOption: PropTypes.bool,
 };
 
 export default Filter;

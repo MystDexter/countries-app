@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import PropTypes from "prop-types";
 import {
   InputAdornment,
   TextField,
@@ -47,6 +48,11 @@ const Search = ({ label, onSearch }) => {
       />
     </Fragment>
   );
+};
+
+Search.propTypes = {
+  label: PropTypes.string,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default Search;

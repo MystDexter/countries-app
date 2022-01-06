@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Icon,
   IconButton,
@@ -20,13 +21,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const Sort = ({
-  label,
-  options,
-  onSortBy = () => {},
-  showSortDirection,
-  onSortOrder = () => {},
-}) => {
+const Sort = ({ label, options, onSortBy, showSortDirection, onSortOrder }) => {
   const classes = useStyles();
 
   return (
@@ -46,6 +41,14 @@ const Sort = ({
       ) : null}
     </div>
   );
+};
+
+Sort.propTypes = {
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onSortBy: PropTypes.func,
+  showSortDirection: PropTypes.bool,
+  onSortOrder: PropTypes.func,
 };
 
 export default Sort;
