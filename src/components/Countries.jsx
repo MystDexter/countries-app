@@ -85,7 +85,7 @@ const Countries = ({ countries }) => {
     setFiltered(countries);
   }, [countries]);
 
-  const handleSort = () => {
+  const handleSortOrder = () => {
     setSortOrder(sortOrder == "asc" ? "desc" : "asc");
   };
 
@@ -158,10 +158,13 @@ const Countries = ({ countries }) => {
             </div>
           </Grid>
           <Grid item xs={6} sm={6} md={4} className={classes.flexEnd}>
-            <Sort label="Sort by" options={sortOptions} onSort={handleSortBy} />
-            <IconButton onClick={handleSort}>
-              <Icon>sort_by_alpha</Icon>
-            </IconButton>
+            <Sort
+              label="Sort by"
+              options={sortOptions}
+              onSortBy={handleSortBy}
+              showSortDirection
+              onSortOrder={handleSortOrder}
+            />
           </Grid>
         </Grid>
       </Toolbar>
