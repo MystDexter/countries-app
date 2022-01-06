@@ -119,13 +119,15 @@ const Country = () => {
 
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
                       <Typography>
-                        <b>Currencies:</b> {currencies[0].name}
+                        <b>Currencies:</b>{" "}
+                        {currencies ? currencies[0].name : ""}
                       </Typography>
                       <Typography>
                         <b>Languages:</b> {languages[0].name}{" "}
                       </Typography>
                       <Typography>
-                        <b>Area Size:</b> {area.toLocaleString()} km²
+                        <b>Area Size:</b> {area ? area.toLocaleString() : ""}{" "}
+                        km²
                       </Typography>
                       <Typography>
                         <b>Native Name:</b> {nativeName}
