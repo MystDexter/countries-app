@@ -12,7 +12,7 @@ This project has been deployed with Vercel and a demo can be can be viewed [here
   In the project directory:
 - Run `npm install`
 - Run `npm start` to run the app in development mode
-- Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Open [http://localhost:3000](http://localhost:3000) to view it in your browser
 
 ## Tech stack
 
@@ -44,6 +44,8 @@ This project has been deployed with Vercel and a demo can be can be viewed [here
 
 - Every component is created to be as reusable. I ensured to keep each child components eg Search, sort etc as pure and stateless as possibe. While this is a small project, this is to demonstrate that should this become bigger, these components can be reused across different sections of the app. A good example of reusablity here is the Filter component being used to filter by region and by areas smaller than Lithuania.
 
-Interactions and data manipulation handled by parent components in a heirachical manner, with child components only dealing with call backs and rendering.
+- Interactions and data manipulation handled by parent components in a top-down heirachical manner, with child components only dealing with callbacks and rendering.
 
-Potential enhancements for this project would include testing Redux for state managemnet
+- Mobile responsiveness.
+
+- Enhancements for this project would include testing and redux for state management.
