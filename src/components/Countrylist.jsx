@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import {
   Avatar,
   Divider,
@@ -7,6 +8,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Typography,
+  Collapse,
   makeStyles,
   createStyles,
 } from "@material-ui/core";
@@ -28,9 +30,14 @@ const CountryList = ({ data }) => {
         const { name, region, area, flag } = item;
         return (
           <Fragment key={i}>
-            <ListItem alignItems="center">
+            <ListItem
+              component={Link}
+              to={`/countries/${name}`}
+              button
+              alignItems="center"
+            >
               <ListItemAvatar>
-                <Avatar alt="flag" src={flag} />
+                <Avatar alt={`flag of ${name}`} src={flag} />
               </ListItemAvatar>
               <ListItemText
                 disableTypography
@@ -39,7 +46,7 @@ const CountryList = ({ data }) => {
                   <Fragment>
                     <Typography variant="body2">Region: {region}</Typography>
                     <Typography variant="body2">
-                      Area Size: {area} km²
+                      Area Size: {area ? area.toLocaleString() : ""} km²
                     </Typography>
                   </Fragment>
                 }

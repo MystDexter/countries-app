@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -28,19 +29,21 @@ const CountryGrid = ({ data }) => {
         return (
           <Grid item xs={12} sm={4} md={3} key={i}>
             <Card>
-              <CardActionArea>
+              <CardActionArea component={Link} to={`/countries/${name}`}>
                 <CardMedia
                   component="img"
                   height="140"
                   image={flag}
-                  alt="flag"
+                  alt={`flag of ${name}`}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h6" component="div">
                     {name}
                   </Typography>
                   <Typography variant="body2">Region: {region}</Typography>
-                  <Typography variant="body2">Area Size: {area} km²</Typography>
+                  <Typography variant="body2">
+                    Area Size: {area ? area.toLocaleString() : ""} km²
+                  </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>

@@ -7,3 +7,4 @@ export { default as CountryList } from "./Countrylist";
 export { default as CountryGrid } from "./Countrygrid";
 export { default as Pagination } from "./Pagination";
 export { default as ToggleView } from "./Toggleview";
+export { default as Country } from "./Country";

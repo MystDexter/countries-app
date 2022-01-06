@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider, Paper } from "@material-ui/core";
 
-import { Header, Countries } from "./components";
-import { fetchCountryData } from "./api";
+import { Header, Countries, Country } from "./components";
+import { fetchAllCountries } from "./api";
 
 function App() {
   const [countryData, setCountryData] = useState([]);
@@ -10,7 +11,7 @@ function App() {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      setCountryData(await fetchCountryData());
+      setCountryData(await fetchAllCountries());
     };
     fetchAPI();
   }, []);
@@ -26,10 +27,24 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper elevation={0}>
-        <Header onChangeMode={(e) => setDark(e)} />
-        <Countries countries={countryData} />
-      </Paper>
+      <Router>
+        <>
+          <Paper elevation={0}>
+            <Header onChangeMode={(e) => setDark(e)} />
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={<Countries countries={countryData} />}
+              />
+
+              {/* <Countries countries={countryData} /> */}
+              {/* </Route> */}
+              <Route path="/countries/:name" element={<Country />} />
+            </Routes>
+          </Paper>
+        </>
+      </Router>
     </ThemeProvider>
   );
 }
