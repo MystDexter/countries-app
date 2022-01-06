@@ -34,12 +34,13 @@ This project has been deployed with Vercel and a demo can be can be viewed [here
 - Light and dark mode
 - Type checking
 
-## Considerations
+## Development Approach
 
-- This project developent was done with the following approach
-  -- Make it work
-  -- then make it fast and scalable
-  -- then make it pretty
+- The development of this project followed this pattern:
+
+  - Make it work
+  - Make it fast and scalable
+  - Make it beautififul
 
 - Every component is created to be as reusable. I ensured to keep each child components eg Search, sort etc as pure and stateless as possibe. While this is a small project, this is to demonstrate that should this become bigger, these components can be reused across different sections of the app. A good example of reusablity here is the Filter component being used to filter by region and by areas smaller than Lithuania.
 
