@@ -32,6 +32,7 @@ This project has been deployed with Vercel and a demo can be can be viewed [here
 - Pagination
 - Single country page
 - Light and dark mode
+- Loading screen
 - Type checking
 
 ## Development Approach
@@ -49,3 +50,11 @@ This project has been deployed with Vercel and a demo can be can be viewed [here
 - Mobile responsiveness.
 
 - Enhancements for this project would include testing and redux for state management.
+
+## Screenshots
+
+![List view](public/screenshots/countrylistview.png)
+![Grid view](public/screenshots/countrytileview.png)
+![Single country](public/screenshots/singlecountry.png)
+![Mobile list view](public/screenshots/countrylist_mobile.jpg)
+![Mobile single country](public/screenshots/singlecountry_mobile.jpg)
