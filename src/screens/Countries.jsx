@@ -181,7 +181,9 @@ const Countries = () => {
             <Pagination
               data={filtered}
               RenderComponent={view == "list" ? CountryList : CountryGrid}
-              pageLimit={5}
+              pageLimit={
+                filtered.length >= 100 ? 5 : Math.ceil(filtered.length / 20)
+              }
               dataLimit={20}
               isFiltered={resetPagination}
             />

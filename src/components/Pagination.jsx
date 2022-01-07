@@ -74,6 +74,30 @@ function Pagination({
     return new Array(pageLimit).fill().map((_, idx) => start + idx + 1);
   };
 
+  const pageButtons = () => {
+    return getPaginationGroup().map((item, index) => (
+      <Fragment key={index}>
+        {item <= pages ? (
+          <Button
+            onClick={handleChangePage}
+            variant={currentPage === item ? "contained" : "text"}
+            color="primary"
+            className={
+              currentPage === item
+                ? classes.paginationItemActive
+                : classes.paginationItem
+            }
+            style={{ maxWidth: 16, maxHeight: 16, minWidth: 16, minHeight: 16 }}
+          >
+            {item <= pages ? item : ""}
+          </Button>
+        ) : (
+          ""
+        )}
+      </Fragment>
+    ));
+  };
+
   return (
     <Fragment>
       <RenderComponent data={getPaginatedData()} />
@@ -88,28 +112,19 @@ function Pagination({
           prev
         </Button>
 
-        {getPaginationGroup().map((item, index) => (
-          <Button
-            key={index}
-            onClick={handleChangePage}
-            variant={currentPage === item ? "contained" : "text"}
-            color="primary"
-            className={
-              currentPage === item
-                ? classes.paginationItemActive
-                : classes.paginationItem
-            }
-            style={{ maxWidth: 16, maxHeight: 16, minWidth: 16, minHeight: 16 }}
-          >
-            {item}
-          </Button>
-        ))}
+        {pageButtons()}
 
         <Button
           onClick={goToNextPage}
           className={classes.direction}
           variant="outlined"
-          disabled={currentPage === pages ? true : false}
+          disabled={
+            currentPage === pages
+              ? true
+              : data.length / dataLimit <= currentPage
+              ? true
+              : false
+          }
           size="small"
         >
           next

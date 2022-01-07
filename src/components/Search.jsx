@@ -36,6 +36,7 @@ const Search = ({ label, onSearch }) => {
       <TextField
         className={classes.searchInput}
         variant="outlined"
+        type="search"
         size="small"
         label={label}
         onChange={(e) => {
