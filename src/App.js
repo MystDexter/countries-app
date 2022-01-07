@@ -20,7 +20,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Paper elevation={0}>
+        <Paper elevation={0} style={{ height: "100%" }}>
           <Header onChangeMode={(e) => setDark(e)} />
           <Routes>
             <Route exact path="/" element={<Countries />} />

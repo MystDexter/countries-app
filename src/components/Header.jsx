@@ -32,7 +32,7 @@ const Header = ({ onChangeMode }) => {
         <Typography variant="h6">COUNTRIES APP</Typography>
         <IconButton size="small" onClick={() => setDark(!dark)}>
           <Icon style={{ color: "yellow", fontSize: 32 }}>
-            {dark ? "dark_mode" : "light_mode"}
+            {dark ? "light_mode" : "dark_mode"}
           </Icon>
         </IconButton>
       </Toolbar>

@@ -14,12 +14,17 @@ const useStyles = makeStyles((theme) =>
       padding: theme.spacing(2),
       borderRadius: "50%",
       margin: `0 ${theme.spacing(0.25)}px`,
+      color:
+        theme.palette.type == "dark" ? "inherit" : theme.palette.primary.main,
     },
     paginationItemActive: {
       padding: theme.spacing(2),
       borderRadius: "50%",
       margin: `0 ${theme.spacing(0.25)}px`,
       pointerEvents: "none",
+      color: theme.palette.type == "dark" ? "black" : "white",
+      backgroundColor:
+        theme.palette.type == "dark" ? "white" : theme.palette.primary.main,
     },
     direction: {
       margin: `0 ${theme.spacing(1)}px`,

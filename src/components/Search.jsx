@@ -7,7 +7,6 @@ import {
   makeStyles,
   createStyles,
 } from "@material-ui/core";
-import { mergeClasses } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

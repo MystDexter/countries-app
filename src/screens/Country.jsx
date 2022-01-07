@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) =>
     collapseButton: {
       minWidth: 40,
       margin: 16,
+      color:
+        theme.palette.type == "dark" ? "inherit" : theme.palette.primary.main,
     },
   })
 );
