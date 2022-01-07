@@ -28,7 +28,7 @@ This project has been deployed with Vercel and a demo can be can be viewed [here
 - Search by country name
 - Filter by region
 - Filter by countries smaller than Lithuania
-- Sort by name and area size in ascending and ascending order
+- Sort by name and area size in ascending and descending order
 - Pagination
 - Single country page
 - Light and dark mode
