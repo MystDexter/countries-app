@@ -1,6 +1,6 @@
 # Countries App
 
-A web app that lists countries in the world, fetched from https://restcountries.com/.
+A web app that lists countries in the world, with detailed info on each country, fetched from https://restcountries.com/.
 
 ## [Demo link](https://countries-app-taupe.vercel.app/)
 
